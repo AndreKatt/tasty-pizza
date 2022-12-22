@@ -5,6 +5,9 @@
 /.pnp
 .pnp.js
 
+# cloned repo
+/react-pizza-html
+
 # testing
 /coverage
 
