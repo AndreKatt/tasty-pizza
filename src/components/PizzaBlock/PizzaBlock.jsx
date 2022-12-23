@@ -25,7 +25,7 @@ export const PizzaBlock = ({ imageUrl, types, sizes, title, price }) => {
         <ul>
           {sizes.map((size, idx) => (
             <li
-              key={idx}
+              key={size}
               onClick={() => setSizesActive(idx)}
               className={sizesActive === idx ? "active" : ""}
             >
