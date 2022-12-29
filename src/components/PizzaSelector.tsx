@@ -4,9 +4,26 @@ import { useDispatch, useSelector } from "react-redux";
 import { addItem } from "../redux/slices/cartSlice";
 import { selectCartItemById } from "../redux/slices/filterSlice";
 
+type PizzaSelectorProps = {
+  id: string;
+  title: string;
+  imageUrl: string;
+  types: number[];
+  sizes: number[];
+  price: number;
+  count: number;
+};
+
 const typeNames = ["тонкое", "традиционное"];
 
-export const PizzaSelector = ({ id, title, imageUrl, types, sizes, price }) => {
+export const PizzaSelector: React.FC<PizzaSelectorProps> = ({
+  id,
+  title,
+  imageUrl,
+  types,
+  sizes,
+  price,
+}) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
   const [sizeActive, setSizeActive] = useState(0);
@@ -31,7 +48,7 @@ export const PizzaSelector = ({ id, title, imageUrl, types, sizes, price }) => {
     <div>
       <div className="pizza-block__selector">
         <ul>
-          {types.map((idx) => (
+          {types.map((_, idx: number) => (
             <li
               key={idx}
               onClick={() => setTypeActive(idx)}
@@ -43,7 +60,7 @@ export const PizzaSelector = ({ id, title, imageUrl, types, sizes, price }) => {
         </ul>
 
         <ul>
-          {sizes.map((size, idx) => (
+          {sizes.map((size: number, idx: number) => (
             <li
               key={size}
               onClick={() => setSizeActive(idx)}

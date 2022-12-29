@@ -4,8 +4,17 @@ import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PizzaSelector } from "../components/PizzaSelector";
 
-export const FullPizza = () => {
-  const [pizza, setPizza] = useState();
+export const FullPizza: React.FC = () => {
+  const [pizza, setPizza] = useState<{
+    id: string;
+    title: string;
+    imageUrl: string;
+    description: string;
+    types: number[];
+    sizes: number[];
+    price: number;
+    count: number;
+  }>();
   const { id } = useParams();
   const nav = useNavigate();
 
@@ -27,7 +36,7 @@ export const FullPizza = () => {
   }, []);
 
   if (!pizza) {
-    return "Загрузка....";
+    return <h2>Загрузка....</h2>;
   }
 
   return (

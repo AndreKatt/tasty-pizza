@@ -6,9 +6,9 @@ import logoSvg from "../assets/img/pizza-logo.svg";
 import { selectCart } from "../redux/slices/cartSlice";
 import { Search } from "./Search/Search";
 
-export const Header = () => {
+export const Header: React.FC = () => {
   const { totalPrice, items } = useSelector(selectCart);
-  const totalCount = items.reduce((sum, item) => item.count + sum, 0);
+  const totalCount = items.reduce((sum: number, item: any) => item.count + sum, 0);
   const location = useLocation();
 
   return (

@@ -2,7 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { PizzaSelector } from "../PizzaSelector";
 
-export const PizzaBlock = ({ ...item }) => {
+type PizzaBlockProps = {
+  id: string;
+  title: string;
+  price: number;
+  count: number;
+  imageUrl: string;
+  sizes: number[];
+  types: number[];
+};
+
+export const PizzaBlock: React.FC<PizzaBlockProps> = ({ ...item }) => {
   return (
     <div className="pizza-block-wrapper">
       <div className="pizza-block">

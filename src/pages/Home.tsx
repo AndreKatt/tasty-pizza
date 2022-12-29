@@ -15,7 +15,7 @@ import {
 } from "../redux/slices/filterSlice";
 import { fetchPizzas, selectPizzaData } from "../redux/slices/pizzasSlice";
 
-const Home = () => {
+const Home: React.FC = () => {
   const nav = useNavigate();
   const dispatch = useDispatch();
   const isMounted = useRef(false);
@@ -24,12 +24,12 @@ const Home = () => {
   const { categoryID, sort, currentPage, searchValue } =
     useSelector(selectFilter);
 
-  const onClickCategory = (id) => {
-    dispatch(setCategoryID(id));
+  const onClickCategory = (idx: number) => {
+    dispatch(setCategoryID(idx));
   };
 
-  const onChangePage = (num) => {
-    dispatch(setCurrentPage(num));
+  const onChangePage = (page: number) => {
+    dispatch(setCurrentPage(page));
   };
 
   const getPizzas = async () => {
@@ -39,6 +39,7 @@ const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
 
     dispatch(
+      // @ts-ignore
       fetchPizzas({
         order,
         sortBy,
@@ -82,7 +83,9 @@ const Home = () => {
     // eslint-disable-next-line
   }, [categoryID, sort.sortProperty, searchValue, currentPage]);
 
-  const pizzas = items.map((item) => <PizzaBlock key={item.id} {...item} />);
+  const pizzas = items.map((item: any) => (
+    <PizzaBlock key={item.id} {...item} />
+  ));
   const skeletons = [...new Array(6)].map((_, idx) => <Skeleton key={idx} />);
 
   return (
