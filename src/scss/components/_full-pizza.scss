@@ -1,0 +1,43 @@
+@import '../variables';
+
+.pizza {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+
+	&__img {
+		display: flex;
+		justify-content: center;
+		border-bottom: 17px solid $background;
+		margin-bottom: 27px;
+
+		img {
+			width: 450px;
+			margin-bottom: 20px;
+		}
+	}
+
+	&__description {
+		margin-left: 100px;
+
+		&_selector {
+			width: 90%;
+
+			.pizza-block__selector {
+				text-align: center;
+				margin-top: 40px;
+				width: 400px;
+			}
+
+			.pizza-block__bottom {
+				display: flex;
+				justify-content: space-between;
+			}
+		}
+	}
+
+	p {
+		margin-top: 10px;
+		opacity: 0.9;
+	}
+}
