@@ -3,18 +3,15 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PizzaSelector } from "../components/PizzaSelector";
+import { CartItem } from "../redux/slices/cartSlice";
 
 export const FullPizza: React.FC = () => {
-  const [pizza, setPizza] = useState<{
-    id: string;
-    title: string;
-    imageUrl: string;
-    description: string;
-    types: number[];
-    sizes: number[];
-    price: number;
-    count: number;
-  }>();
+  const [pizza, setPizza] = useState<
+    CartItem & {
+      types: string[];
+      sizes: number[];
+    }
+  >();
   const { id } = useParams();
   const nav = useNavigate();
 

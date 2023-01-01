@@ -1,22 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem } from "../redux/slices/cartSlice";
+import { addItem, CartItem } from "../redux/slices/cartSlice";
 import { selectCartItemById } from "../redux/slices/filterSlice";
 
-type PizzaSelectorProps = {
-  id: string;
-  title: string;
-  imageUrl: string;
-  types: number[];
+export type PizzaSelectorProps = {
+  types: string[];
   sizes: number[];
-  price: number;
-  count: number;
 };
 
 const typeNames = ["тонкое", "традиционное"];
 
-export const PizzaSelector: React.FC<PizzaSelectorProps> = ({
+export const PizzaSelector: React.FC<CartItem & PizzaSelectorProps> = ({
   id,
   title,
   imageUrl,
@@ -32,7 +27,7 @@ export const PizzaSelector: React.FC<PizzaSelectorProps> = ({
   const addedCount = cartItem ? cartItem.count : 0;
 
   const onClickAdd = () => {
-    const item = {
+    const item: CartItem = {
       id,
       title,
       price,

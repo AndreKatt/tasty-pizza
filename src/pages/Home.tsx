@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import qs from "qs";
 import { useNavigate } from "react-router-dom";
 
@@ -14,10 +14,11 @@ import {
   setCurrentPage,
 } from "../redux/slices/filterSlice";
 import { fetchPizzas, selectPizzaData } from "../redux/slices/pizzasSlice";
+import { useAppDispatch } from "../redux/store";
 
 const Home: React.FC = () => {
   const nav = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const isMounted = useRef(false);
 
   const { items, status } = useSelector(selectPizzaData);
@@ -39,13 +40,12 @@ const Home: React.FC = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
 
     dispatch(
-      // @ts-ignore
       fetchPizzas({
         order,
         sortBy,
         category,
         search,
-        currentPage,
+        currentPage: String(currentPage),
       })
     );
 
@@ -64,7 +64,7 @@ const Home: React.FC = () => {
     }
 
     if (!window.location.search) {
-      fetchPizzas();
+      dispatch(fetchPizzas({}));
     }
     isMounted.current = true;
     // eslint-disable-next-line
@@ -73,7 +73,7 @@ const Home: React.FC = () => {
   // Если был первый рендер, то проверяем URL-параметры и сохраняем в редаксе
   useEffect(() => {
     if (window.location.search) {
-      fetchPizzas();
+      dispatch(fetchPizzas({}));
     }
     // eslint-disable-next-line
   }, [categoryID, sort.sortProperty, searchValue, currentPage]);
