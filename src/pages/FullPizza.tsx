@@ -3,11 +3,11 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { PizzaSelector } from "../components/PizzaSelector";
-import { CartItem } from "../redux/slices/cartSlice";
+import { CartItemType } from "../components/CartItem";
 
 export const FullPizza: React.FC = () => {
   const [pizza, setPizza] = useState<
-    CartItem & {
+    CartItemType & {
       types: string[];
       sizes: number[];
     }
@@ -33,7 +33,7 @@ export const FullPizza: React.FC = () => {
   }, []);
 
   if (!pizza) {
-    return <h2>Загрузка....</h2>;
+    return <>Загрузка....</>;
   }
 
   return (

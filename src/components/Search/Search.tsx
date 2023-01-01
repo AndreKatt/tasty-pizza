@@ -7,7 +7,7 @@ import styles from "./Search.module.scss";
 
 export const Search: React.FC = () => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   const onClickClear = () => {

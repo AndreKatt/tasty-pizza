@@ -1,19 +1,19 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { addItem, minusItem, removeItem } from "../redux/slices/cartSlice";
-import { useAppDispatch } from "../redux/store";
 
-type CartItemProps = {
+export type CartItemType = {
   id: string;
-  title: string;
-  price: number;
-  count: number;
-  imageUrl: string;
-  type: string;
-  size: number;
+  title?: string;
+  imageUrl?: string;
+  description?: string;
+  price?: number;
+  count?: number;
+  type?: string;
+  size?: number;
 };
 
-export const CartItem: React.FC<CartItemProps> = ({
+export const CartItem: React.FC<CartItemType> = ({
   id,
   title,
   price,
@@ -22,7 +22,7 @@ export const CartItem: React.FC<CartItemProps> = ({
   type,
   size,
 }) => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
 
   const onClickPlus = () => {
     dispatch(
@@ -98,7 +98,7 @@ export const CartItem: React.FC<CartItemProps> = ({
         </div>
       </div>
       <div className="cart__item-price">
-        <b>{price * count} ₽</b>
+        <b>{price && count && price * count} ₽</b>
       </div>
       <div onClick={onClickRemove} className="cart__item-remove">
         <div className="button button--outline button--circle">

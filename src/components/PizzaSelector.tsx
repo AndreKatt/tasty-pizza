@@ -1,24 +1,18 @@
 import React from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, CartItem } from "../redux/slices/cartSlice";
+import { addItem } from "../redux/slices/cartSlice";
 import { selectCartItemById } from "../redux/slices/filterSlice";
-
-export type PizzaSelectorProps = {
-  types: string[];
-  sizes: number[];
-};
+import { CartItemType } from "./CartItem";
 
 const typeNames = ["тонкое", "традиционное"];
 
-export const PizzaSelector: React.FC<CartItem & PizzaSelectorProps> = ({
-  id,
-  title,
-  imageUrl,
-  types,
-  sizes,
-  price,
-}) => {
+export const PizzaSelector: React.FC<
+  CartItemType & {
+    types: string[];
+    sizes: number[];
+  }
+> = ({ id, title, imageUrl, types, sizes, price }) => {
   const dispatch = useDispatch();
   const cartItem = useSelector(selectCartItemById(id));
   const [sizeActive, setSizeActive] = useState(0);
@@ -27,7 +21,7 @@ export const PizzaSelector: React.FC<CartItem & PizzaSelectorProps> = ({
   const addedCount = cartItem ? cartItem.count : 0;
 
   const onClickAdd = () => {
-    const item: CartItem = {
+    const item: CartItemType = {
       id,
       title,
       price,
@@ -55,7 +49,7 @@ export const PizzaSelector: React.FC<CartItem & PizzaSelectorProps> = ({
         </ul>
 
         <ul>
-          {sizes.map((size: number, idx: number) => (
+          {sizes.map((size, idx) => (
             <li
               key={size}
               onClick={() => setSizeActive(idx)}
@@ -86,7 +80,7 @@ export const PizzaSelector: React.FC<CartItem & PizzaSelectorProps> = ({
             />
           </svg>
           <span>Добавить</span>
-          {addedCount > 0 && <i>{addedCount}</i>}
+          {addedCount! > 0 && <i>{addedCount}</i>}
         </button>
       </div>
     </div>

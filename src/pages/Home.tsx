@@ -25,8 +25,8 @@ const Home: React.FC = () => {
   const { categoryID, sort, currentPage, searchValue } =
     useSelector(selectFilter);
 
-  const onClickCategory = (idx: number) => {
-    dispatch(setCategoryID(idx));
+  const onClickCategory = (id: number) => {
+    dispatch(setCategoryID(id));
   };
 
   const onChangePage = (page: number) => {
@@ -64,7 +64,7 @@ const Home: React.FC = () => {
     }
 
     if (!window.location.search) {
-      dispatch(fetchPizzas({}));
+      fetchPizzas({});
     }
     isMounted.current = true;
     // eslint-disable-next-line
@@ -73,7 +73,7 @@ const Home: React.FC = () => {
   // Если был первый рендер, то проверяем URL-параметры и сохраняем в редаксе
   useEffect(() => {
     if (window.location.search) {
-      dispatch(fetchPizzas({}));
+      fetchPizzas({});
     }
     // eslint-disable-next-line
   }, [categoryID, sort.sortProperty, searchValue, currentPage]);

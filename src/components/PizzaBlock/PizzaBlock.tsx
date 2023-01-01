@@ -1,11 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { CartItem } from "../../redux/slices/cartSlice";
-import { PizzaSelector, PizzaSelectorProps } from "../PizzaSelector";
+import { CartItemType } from "../CartItem";
+import { PizzaSelector } from "../PizzaSelector";
 
-export const PizzaBlock: React.FC<CartItem & PizzaSelectorProps> = ({
-  ...item
-}) => {
+export const PizzaBlock: React.FC<
+  CartItemType & {
+    types: string[];
+    sizes: number[];
+  }
+> = ({ ...item }) => {
   return (
     <div className="pizza-block-wrapper">
       <div className="pizza-block">
