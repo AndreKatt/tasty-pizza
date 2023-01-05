@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import { PizzaSelector } from "../components/PizzaSelector";
-import { CartItemType } from "../components/CartItem";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-export const FullPizza: React.FC = () => {
+import { PizzaSelector, CartItemType } from "../components";
+
+const FullPizza: React.FC = () => {
   const [pizza, setPizza] = useState<
     CartItemType & {
       types: string[];
@@ -47,7 +47,33 @@ export const FullPizza: React.FC = () => {
         <div className="pizza__description_selector">
           <PizzaSelector {...pizza} />
         </div>
+        <div className="cart__bottom-buttons">
+          <Link
+            to="/"
+            className="button button--outline button--add go-back-btn"
+          >
+            <svg
+              width="8"
+              height="14"
+              viewBox="0 0 8 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7 13L1 6.93015L6.86175 1"
+                stroke="#D3D3D3"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+
+            <span>Вернуться назад</span>
+          </Link>
+        </div>
       </div>
     </div>
   );
 };
+
+export default FullPizza;

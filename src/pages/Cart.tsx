@@ -1,9 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { CartItem } from "../components/CartItem";
-import { CartEmpty } from "../components/CartEmpty";
+import { CartItem, CartEmpty } from "../components";
 
 // redux
 import { clearItems } from "../redux/cart/slice";
@@ -17,11 +16,6 @@ const Cart: React.FC = () => {
     (sum: number, item: any) => item.count + sum,
     0
   );
-
-  useEffect(() => {
-    const json = JSON.stringify(items);
-    console.log(json);
-  }, [items]);
 
   const onClickClear = () => {
     if (window.confirm("Вы действительно хотите очистить корзину?"))
